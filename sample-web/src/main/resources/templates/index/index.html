@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head th:include="template :: fragment_html_head(title='Training Application')">
+</head>
+<body>
+	<header th:include="template :: fragment_header(title='Training Application')"></header>
+
+	<div>
+		<span  sec:authorize="hasRole('ROLE_ADMIN')">管理者権限でログイン中</span>
+	    <span sec:authorize="hasRole('ROLE_USER')">一般権限でログイン中</span>
+	</div>
+    
+	<footer th:include="template :: fragment_footer"></footer>
+</body>
+</html>

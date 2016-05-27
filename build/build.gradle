@@ -1,0 +1,76 @@
+import org.gradle.plugins.ide.eclipse.model.SourceFolder
+
+subprojects {
+    buildscript {
+        ext {
+            springBootVersion = '1.2.5.RELEASE'
+			springSecurityVersion = '4.0.2.RELEASE'
+            encoding = 'UTF-8'
+            compatibility = 1.8
+        }
+        repositories {
+            mavenCentral()
+        }
+    }
+
+    apply plugin: 'java'
+	apply plugin: 'groovy'
+	apply plugin: 'eclipse'
+
+    sourceCompatibility = compatibility
+    targetCompatibility = compatibility
+
+    tasks.withType(AbstractCompile) each { it.options.encoding = encoding }
+    tasks.withType(GroovyCompile) each { it.groovyOptions.encoding = encoding }
+
+    test {
+        if (project.hasProperty('sysprops')) {
+            project.sysprops.split('\\s+').each {
+                systemProperty it.split('=')[0], it.split('=')[1]
+            }
+        }
+    }
+
+    repositories {
+        mavenCentral()
+    }
+    eclipse {
+  		classpath {
+			file{
+				beforeMerged {classpath ->
+					classpath.entries.removeAll { it instanceof SourceFolder && it.path.startsWith("src/main/java") && it.output == "build/classes/main"}
+				}
+				beforeMerged {classpath ->
+					classpath.entries.removeAll { it instanceof SourceFolder && it.path.startsWith("src/main/resources") && it.output == "build/resources/main"}
+				}
+				beforeMerged {classpath ->
+					classpath.entries.removeAll { it instanceof SourceFolder && it.path.startsWith("src/test/java") && it.output == "build/classes/test"}
+				}
+				beforeMerged {classpath ->
+					classpath.entries.removeAll { it instanceof SourceFolder && it.path.startsWith("src/test/groovy") && it.output == "build/classes/test"}
+				}
+				beforeMerged {classpath ->
+					classpath.entries.removeAll { it instanceof SourceFolder && it.path.startsWith("src/test/resources") && it.output == "build/resources/test"}
+				}
+				whenMerged {classpath ->
+	            	classpath.entries.findAll { it instanceof SourceFolder && it.path.startsWith("src/main/java") }*.output = "build/classes/main"
+	            }
+				whenMerged {classpath ->
+	            	classpath.entries.findAll { it instanceof SourceFolder && it.path.startsWith("src/main/resources") }*.output = "build/resources/main"
+	            }
+				whenMerged {classpath ->
+	            	classpath.entries.findAll { it instanceof SourceFolder && it.path.startsWith("src/test/java") }*.output = "build/classes/test"
+	            }
+				whenMerged {classpath ->
+	            	classpath.entries.findAll { it instanceof SourceFolder && it.path.startsWith("src/test/groovy") }*.output = "build/classes/test"
+	            }
+				whenMerged {classpath ->
+	            	classpath.entries.findAll { it instanceof SourceFolder && it.path.startsWith("src/test/resources/") }*.output = "build/resources/test"
+	            }
+	        }
+		}
+    }
+    dependencies {
+    	runtime( 'org.yaml:snakeyaml:1.16' )
+    }
+}

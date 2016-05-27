@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:include="template :: fragment_html_head(title='Training Application')">
+</head>
+<body>
+	<header th:include="template :: fragment_header(title='Login')"></header>
+	
+	<form th:action="@{/login}" method="POST">
+		<table>
+			<tr>
+				<th><label for="username">ユーザーID</label></th>
+				<td><input type="text" name="username" id="username" th:value="${username}"></td>
+			</tr>
+			<tr>
+				<th><label for="password">パスワード</label></th>
+				<td><input type="password" name="password" id="password"></td>
+			</tr>
+		</table>
+		<div>
+			<input type="submit" value="ログイン" />
+		</div>
+	</form>
+	<footer th:include="template :: fragment_footer"></footer>
+</body>
+</html>

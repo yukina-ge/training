@@ -1,0 +1,15 @@
+
+# Gradle
+.gradle
+*.class
+*/build
+
+# eclipse
+RemoteSystemsTempFiles
+Servers
+.metadata
+.recommenders
+**/.classpath
+**/.project
+**/.settings
+**/bin

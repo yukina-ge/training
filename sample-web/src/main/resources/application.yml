@@ -1,0 +1,23 @@
+spring:
+  thymeleaf:
+   cache: false
+   mode: LEGACYHTML5
+
+server:
+  contextPath: /sample
+  port: 8080
+
+logging:
+  level:
+    root: INFO
+    jp.rhp.mynumber.datasource: DEBUG
+    org.springframework.security.web.csrf: DEBUG
+
+sample:
+  datasource:
+    sampledb:
+      sql-script-encoding: UTF-8
+      driver-class-name: org.postgresql.Driver
+      url: jdbc:postgresql://localhost:5432/sample
+      username: sample
+      password: sample
