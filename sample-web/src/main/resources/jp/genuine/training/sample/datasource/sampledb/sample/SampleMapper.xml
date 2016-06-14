@@ -4,7 +4,7 @@
 
 	<select id="find" resultType="java.lang.String" flushCache="true">
 		SELECT
-			"Sample" ;
+			'Sample' ;
 	</select>
 
 </mapper>

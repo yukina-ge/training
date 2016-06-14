@@ -1,4 +1,4 @@
-package jp.genuine.training.sample.sample;
+package jp.genuine.training.sample.model.sample;
 
 public interface SampleRepository {
 

@@ -1,0 +1,14 @@
+sample:
+  datasource:
+    sampledb:
+      sql-script-encoding: UTF-8
+      driver-class-name: org.postgresql.Driver
+      url: jdbc:postgresql://localhost:5432/school
+      username: owner_school
+      password: owner_school#1
+
+logging:
+  level:
+    root: INFO
+    jp.rhp.mynumber.datasource: DEBUG
+    org.springframework.security.web.csrf: DEBUG
