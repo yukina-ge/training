@@ -1,15 +1,19 @@
 package jp.genuine.training.sample;
 
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
-import org.springframework.security.config.annotation.authentication.configurers.GlobalAuthenticationConfigurerAdapter;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.annotation.web.servlet.configuration.EnableWebMvcSecurity;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.web.bind.support.AuthenticationPrincipalArgumentResolver;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
+import jp.genuine.training.sample.service.SampleUserDetailsServiceImpl;
+
 @Configuration
-@EnableWebSecurity
+@EnableWebMvcSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	
 	@Override
@@ -35,12 +39,19 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		http.csrf();
 	}
 
-    @Configuration
-    protected static class AuthenticationConfiguration extends GlobalAuthenticationConfigurerAdapter {
-        @Override
-        public void init(AuthenticationManagerBuilder auth) throws Exception {
-            auth.inMemoryAuthentication().withUser("user1").password("password1").roles("USER");
-            auth.inMemoryAuthentication().withUser("user2").password("password2").roles("ADMIN");
-        }
+    @Override
+    protected void configure( AuthenticationManagerBuilder auth ) throws Exception
+    {
+        auth.userDetailsService(sampleUserDetailService());
+    }
+    
+    @Bean
+    public UserDetailsService sampleUserDetailService()
+    {
+        return new SampleUserDetailsServiceImpl();
+    }
+    @Bean
+    public AuthenticationPrincipalArgumentResolver authenticationPrincipalArgumentResolver(){
+        return new AuthenticationPrincipalArgumentResolver();
     }
 }
