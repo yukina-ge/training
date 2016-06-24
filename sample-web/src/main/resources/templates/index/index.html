@@ -6,11 +6,49 @@
 	</head>
 	<body>
 		<header th:include="template :: fragment_header(title='Training Application')"></header>
-		<div>
-			ログインに成功しました。
-			<span  sec:authorize="hasRole('ROLE_ADMIN')">管理者権限で表示しています。</span>
-		    <span sec:authorize="hasRole('ROLE_USER')">一般権限で表示しています。</span>
+		<div class="mdl-grid">
+			<div class="mdl-cell mdl-cell--2-col"></div>
+			<div class="mdl-cell mdl-cell--8-col">
+				<div class="mdl-card__wide mdl-card mdl-shadow--2dp">
+					<div class="mdl-card__title">
+						<h2><i class="fa fa-list" aria-hidden="true"></i> Users</h2>
+						<form th:action="@{/account/register}">
+							<button class="sample-plus-button mdl-button mdl-js-button mdl-button--fab mdl-button--colored">
+								<i class="fa fa-user-plus"></i>
+							</button>
+						</form>
+					</div>
+					<ul class="mdl-list-icon mdl-list">
+						<li class="mdl-list__item">
+							<span class="mdl-list__item-primary-content">
+								<i class="fa fa-user fa-2x"></i><span>Miyuki Inoue</span>
+							</span>
+							<span>
+								<a href="" class="mdl-button mdl-js-button mdl-button--primary"><i class="fa fa-pencil"></i>Edit</a>
+							</span>
+						</li>
+						<li class="mdl-list__item">
+							<span class="mdl-list__item-primary-content">
+								<i class="fa fa-user fa-2x"></i><span>Miyuki Inoue</span>
+							</span>
+							<span>
+								<a href="" class="mdl-button mdl-js-button mdl-button--primary"><i class="fa fa-pencil"></i>Edit</a>
+							</span>
+						</li>
+						<li class="mdl-list__item">
+							<span class="mdl-list__item-primary-content">
+								<i class="fa fa-user fa-2x"></i><span>Miyuki Inoue</span>
+							</span>
+							<span>
+								<a href="" class="mdl-button mdl-js-button mdl-button--primary"><i class="fa fa-pencil"></i>Edit</a>
+							</span>
+						</li>						
+					</ul>
+				</div>
+			</div>
+			<div class="mdl-cell mdl-cell--2-col"></div>
 		</div>
+
 		<footer th:include="template :: fragment_footer"></footer>
 	</body>
 </html>

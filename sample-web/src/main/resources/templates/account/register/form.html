@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+	<head th:include="template :: fragment_html_head(title='New Account')">
+			<meta charset="UTF-8" />
+	</head>
+	<body>
+		<header th:include="template :: fragment_header(title='New Account')"></header>
+		<div class="mdl-grid">
+			<div class="mdl-cell mdl-cell--2-col"></div>
+			<div class="mdl-cell mdl-cell--8-col">
+				<div class="mdl-card__wide mdl-card mdl-shadow--2dp">
+					<div class="mdl-card__title">
+						<h2><i class="fa fa-pencil" aria-hidden="true"></i> Create Account</h2>
+					</div>
+					<div>
+						<form th:action="@{/account/register}" th:object="${account}" method="POST">
+							<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" th:classappend="*{#fields.hasErrors('accountName.value')}? is-invalid">
+								<label class="mdl-textfield__label">アカウント名</label>
+								<input type="text" th:field="*{accountName.value}" class="mdl-textfield__input" />
+								<span th:if="*{#fields.hasErrors('accountName.value')}" th:errors="*{accountName.value}" class="mdl-textfield__error" ></span>
+							</div>
+							<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" th:classappend="*{#fields.hasErrors('userName.value')}? is-invalid">
+								<label class="mdl-textfield__label">ユーザー名</label>
+								<input type="text" th:field="*{userName.value}" class="mdl-textfield__input" />
+								<span th:if="*{#fields.hasErrors('userName.value')}" th:errors="*{userName.value}" class="mdl-textfield__error" ></span>
+							</div>
+							<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" th:classappend="*{#fields.hasErrors('password.value')}? is-invalid">
+								<label class="mdl-textfield__label">パスワード</label>
+								<input type="password" th:field="*{password.value}" class="mdl-textfield__input" autocomplete="off"/>
+								<span th:if="*{#fields.hasErrors('password.value')}" th:errors="*{password.value}" class="mdl-textfield__error" ></span>
+							</div>
+							<div class="mdl-card__actions">
+								<button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored">Submit</button>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+			<div class="mdl-cell mdl-cell--2-col"></div>
+		</div>
+		<footer th:include="template :: fragment_footer"></footer>
+	</body>
+</html>

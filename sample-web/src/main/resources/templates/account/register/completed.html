@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+	<head th:include="template :: fragment_html_head(title='New Account')">
+			<meta charset="UTF-8" />
+	</head>
+	<body>
+		<header th:include="template :: fragment_header(title='New Account')"></header>
+		<div class="mdl-grid">
+			<div class="mdl-cell mdl-cell--2-col"></div>
+			<div class="mdl-cell mdl-cell--8-col">
+				<div class="mdl-card__wide mdl-card mdl-shadow--2dp">
+					<div class="mdl-card__title">
+						<h2>Account Register Form</h2>
+					</div>
+					<div class="mdl-card__supporting-text">
+						<p>登録が完了しました。</p>
+					</div>
+					<div class="mdl-card__actions mdl-card--border">
+						<a th:href="@{/index}" class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">BACK TO TOP</a>
+					</div>
+				</div>
+			</div>
+			<div class="mdl-cell mdl-cell--2-col"></div>
+		</div>
+		<footer th:include="template :: fragment_footer"></footer>
+	</body>
+</html>

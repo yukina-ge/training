@@ -1,6 +1,9 @@
 package jp.genuine.training.sample.model.account;
 
+import org.hibernate.validator.constraints.NotEmpty;
+
 public class Password {
+	@NotEmpty
 	private String value;
 	public Password()
 	{

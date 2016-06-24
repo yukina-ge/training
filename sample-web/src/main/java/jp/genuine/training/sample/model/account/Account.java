@@ -1,8 +1,13 @@
 package jp.genuine.training.sample.model.account;
 
+import javax.validation.Valid;
+
 public class Account {
+	@Valid
 	private AccountName accountName;
+	@Valid
 	private UserName userName;
+	@Valid
 	private Password password;
 	public Account() {
 		accountName = new AccountName();

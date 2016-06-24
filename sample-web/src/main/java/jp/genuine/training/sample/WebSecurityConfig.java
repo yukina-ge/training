@@ -28,7 +28,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 					"/login",
 					"/logout",
 					"/healthcheck").permitAll()
-			.antMatchers("/index/**").hasAnyRole("USER","ADMIN");
+			.anyRequest().hasAnyRole("USER","ADMIN");
 		
 		http.formLogin()
         	.defaultSuccessUrl("/index");
