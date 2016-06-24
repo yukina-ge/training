@@ -3,6 +3,8 @@ package jp.genuine.training.sample.model.account;
 import javax.validation.Valid;
 
 public class Account {
+
+	private AccountId accountId;
 	@Valid
 	private AccountName accountName;
 	@Valid
@@ -10,16 +12,21 @@ public class Account {
 	@Valid
 	private Password password;
 	public Account() {
+		accountId = new AccountId();
 		accountName = new AccountName();
 		userName = new UserName();
 		password = new Password();
 	}
-	public Account(AccountName accountName, UserName userName, Password password) {
+	public Account(AccountId accountId, AccountName accountName, UserName userName, Password password) {
+		this.accountId = accountId;
 		this.accountName = accountName;
 		this.userName = userName;
 		this.password = password;
 	}
 
+	public AccountId getAccountId() {
+		return accountId;
+	}
 	public AccountName getAccountName() {
 		return accountName;
 	}
@@ -28,6 +35,9 @@ public class Account {
 	}
 	public Password getPassword() {
 		return password;
+	}
+	public void setAccountId(AccountId accountId) {
+		this.accountId = accountId;
 	}
 	public void setAccountName(AccountName accountName) {
 		this.accountName = accountName;

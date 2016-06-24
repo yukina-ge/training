@@ -19,28 +19,12 @@
 						</form>
 					</div>
 					<ul class="mdl-list-icon mdl-list">
-						<li class="mdl-list__item">
+						<li class="mdl-list__item" th:each="account : ${accounts}">
 							<span class="mdl-list__item-primary-content">
-								<i class="fa fa-user fa-2x"></i><span>Miyuki Inoue</span>
+								<i class="fa fa-user fa-2x"></i><span th:text="${account.userName.value}">Bryan Cranston</span>
 							</span>
 							<span>
-								<a href="" class="mdl-button mdl-js-button mdl-button--primary"><i class="fa fa-pencil"></i>Edit</a>
-							</span>
-						</li>
-						<li class="mdl-list__item">
-							<span class="mdl-list__item-primary-content">
-								<i class="fa fa-user fa-2x"></i><span>Miyuki Inoue</span>
-							</span>
-							<span>
-								<a href="" class="mdl-button mdl-js-button mdl-button--primary"><i class="fa fa-pencil"></i>Edit</a>
-							</span>
-						</li>
-						<li class="mdl-list__item">
-							<span class="mdl-list__item-primary-content">
-								<i class="fa fa-user fa-2x"></i><span>Miyuki Inoue</span>
-							</span>
-							<span>
-								<a href="" class="mdl-button mdl-js-button mdl-button--primary"><i class="fa fa-pencil"></i>Edit</a>
+								<a th:href="@{/account/{accountId}/modify(accountId=${account.accountId.value})}" class="mdl-button mdl-js-button mdl-button--primary"><i class="fa fa-pencil"></i>Edit</a>
 							</span>
 						</li>						
 					</ul>

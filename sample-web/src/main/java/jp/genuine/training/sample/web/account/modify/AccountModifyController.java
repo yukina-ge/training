@@ -1,4 +1,4 @@
-package jp.genuine.training.sample.web.account.register;
+package jp.genuine.training.sample.web.account.modify;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
@@ -9,33 +9,36 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import jp.genuine.training.sample.model.account.Account;
-import jp.genuine.training.sample.model.account.AccountFactory;
+import jp.genuine.training.sample.model.account.AccountId;
 import jp.genuine.training.sample.model.account.LoginAccount;
-import jp.genuine.training.sample.service.account.RegisterAccountService;
+import jp.genuine.training.sample.service.account.FindAccountService;
+import jp.genuine.training.sample.service.account.ModifyAccountService;
 
 @Controller
-@RequestMapping( "/account/register" )
-public class AccountRegisterController {
+@RequestMapping( "/account/{accountId:\\d+}/modify" )
+public class AccountModifyController {
 
 	@Autowired
-	private AccountFactory accountFactory;
+	private FindAccountService findAccountService;
 	
 	@Autowired
-	private RegisterAccountService accountRegisterService;
+	private ModifyAccountService modifyAccountService;
 
 	@RequestMapping(value="", method=RequestMethod.GET)
 	public String form(
+			@PathVariable("accountId") AccountId accountId,
 			@AuthenticationPrincipal LoginAccount loginAccount, 
 			Model model, 
 			HttpServletRequest request){
-		Account account = accountFactory.create();
+		Account account = findAccountService.find( accountId );
 		model.addAttribute( "account", account );
 		
-		return "/account/register/form";
+		return "/account/modify/form";
 	}
 	@RequestMapping(value="", method=RequestMethod.POST)
 	public String execute(
@@ -48,10 +51,10 @@ public class AccountRegisterController {
 		model.addAttribute( "account", account );
 		
 		if(bindingResult.hasErrors())
-			return "/account/register/form";
+			return "/account/modify/form";
 		
-		accountRegisterService.register(account);
+		modifyAccountService.modify(account);
 		
-		return "/account/register/completed";
+		return "/account/modify/completed";
 	}
 }

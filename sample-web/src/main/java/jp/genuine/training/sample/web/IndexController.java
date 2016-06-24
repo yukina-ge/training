@@ -1,5 +1,7 @@
 package jp.genuine.training.sample.web;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,20 +11,22 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import jp.genuine.training.sample.model.account.Account;
 import jp.genuine.training.sample.model.account.LoginAccount;
-import jp.genuine.training.sample.model.sample.SampleRepository;
+import jp.genuine.training.sample.service.account.ListingAccountService;
 
 @Controller
 @RequestMapping("/index")
 public class IndexController {
 
 	@Autowired
-	private SampleRepository repository;
+	private ListingAccountService service;
 	
 	@RequestMapping(value="", method=RequestMethod.GET)
 	public String show(
 			@AuthenticationPrincipal LoginAccount loginAccount, Model model, HttpServletRequest request){
-		repository.find();
+		List<Account> accounts = service.list(loginAccount);
+		model.addAttribute("accounts", accounts );
 		return "/index/index";
 	}
 

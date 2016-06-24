@@ -5,7 +5,7 @@ import org.springframework.stereotype.Service;
 import jp.genuine.training.sample.model.account.Account;
 
 @Service
-public class AccountRegisterServiceImpl implements AccountRegisterService{
+public class RegisterAccountServiceImpl implements RegisterAccountService{
 
 	@Override
 	public void register(Account account) {
