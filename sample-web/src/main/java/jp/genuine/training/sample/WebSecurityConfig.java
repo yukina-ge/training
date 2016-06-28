@@ -7,7 +7,6 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.annotation.web.servlet.configuration.EnableWebMvcSecurity;
 import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.web.bind.support.AuthenticationPrincipalArgumentResolver;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 import jp.genuine.training.sample.service.SampleUserDetailsServiceImpl;
@@ -33,7 +32,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		http.formLogin()
 			.loginPage("/login")
 			.failureUrl("/login?error").permitAll()
-        	.defaultSuccessUrl("/index");
+        	.defaultSuccessUrl("/index",true);
 		
 		http.logout()
     		.logoutRequestMatcher( new AntPathRequestMatcher( "/logout" ) );
@@ -51,9 +50,5 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     public UserDetailsService sampleUserDetailService()
     {
         return new SampleUserDetailsServiceImpl();
-    }
-    @Bean
-    public AuthenticationPrincipalArgumentResolver authenticationPrincipalArgumentResolver(){
-        return new AuthenticationPrincipalArgumentResolver();
     }
 }
